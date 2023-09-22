@@ -18,5 +18,8 @@ RUN apk --no-cache add curl \
     && rm "flyway-commandline-${FLYWAY_VERSION}-linux-x64.tar.gz" \
     && mv "flyway-${FLYWAY_VERSION}" "${FLYWAY_HOME}" \
     && apk del curl
+# Copy your Flyway migration scripts to the container
+COPY src/main/resources/db/migration /flyway/sql/
+    
 
 ENTRYPOINT ["java","-jar","/opt/MyAssist.jar"]
