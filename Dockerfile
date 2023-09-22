@@ -6,4 +6,8 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jdk-alpine
 COPY --from=build target/MyAssist-0.0.1-SNAPSHOT.jar /opt/MyAssist.jar
 EXPOSE 8080
+
+RUN apt-get update && \
+    apt-get install -y flyway
+
 ENTRYPOINT ["java","-jar","/opt/MyAssist.jar"]
