@@ -20,6 +20,7 @@ RUN apk --no-cache add curl \
     && apk del curl
 # Copy your Flyway migration scripts to the container
 COPY src/main/resources/db/migration /flyway/sql/
-    
 
-ENTRYPOINT ["java","-jar","/opt/MyAssist.jar"]
+CMD ["sh", "-c", "${FLYWAY_HOME}/flyway migrate && java -jar /opt/MyAssist.jar"]
+
+#ENTRYPOINT ["java","-jar","/opt/MyAssist.jar"]
